@@ -7,18 +7,16 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
 
-  // Global prefix
   app.setGlobalPrefix('api/v1');
 
-  // CORS
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: [
+      process.env.FRONTEND_URL,
+      'http://localhost:5173',
+    ].filter(Boolean),
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -30,7 +28,6 @@ async function bootstrap() {
     }),
   );
 
-  // Swagger API docs
   const config = new DocumentBuilder()
     .setTitle('Finance Dashboard API')
     .setDescription('Production-grade Finance Dashboard REST API')
@@ -39,10 +36,10 @@ async function bootstrap() {
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
       'JWT-auth',
     )
-    .addTag('Authentication', 'Auth endpoints')
-    .addTag('Users', 'User management (Admin only)')
-    .addTag('Records', 'Financial records CRUD')
-    .addTag('Analytics', 'Dashboard analytics endpoints')
+    .addTag('Authentication')
+    .addTag('Users')
+    .addTag('Records')
+    .addTag('Analytics')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -52,11 +49,11 @@ async function bootstrap() {
     },
   });
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
   await app.listen(port);
 
-  logger.log(`🚀 Server running on: http://localhost:${port}`);
-  logger.log(`📚 API Docs available at: http://localhost:${port}/api/docs`);
+  logger.log(`🚀 Server running on port: ${port}`);
+  logger.log(`📚 API Docs available at: /api/docs`);
 }
 
 bootstrap();
