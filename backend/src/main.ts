@@ -50,11 +50,11 @@ app.enableCors({
     },
   });
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
+const port = Number(process.env.PORT) || 3000;
+await app.listen(port, '0.0.0.0');
 
-  logger.log(`🚀 Server running on port: ${port}`);
-  logger.log(`📚 API Docs available at: /api/docs`);
+logger.log(`🚀 Server running on port: ${port}`);
+logger.log(`📚 API Docs available at: /api/docs`);
 }
 
 bootstrap();
