@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #0f0f11;
+    color: #f4f4f6;
+  }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2a2a32; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7c6af740; }
+
+  ::selection { background: #7c6af730; color: #f4f4f6; }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface-2 rounded-2xl border border-white/5 shadow-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white font-medium text-sm
+           hover:bg-accent-hover active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl text-ink-muted text-sm font-medium
+           hover:bg-surface-3 hover:text-ink active:scale-95 transition-all duration-150;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-negative/10 text-negative text-sm font-medium
+           hover:bg-negative/20 active:scale-95 transition-all duration-150 border border-negative/20;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-xl bg-surface-3 border border-white border-opacity-10 text-ink text-sm placeholder:text-ink-faint
+           focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-150;
+  }
+
+  .label {
+    @apply block text-xs font-medium text-ink-muted mb-1.5 uppercase tracking-wider;
+  }
+
+  .badge-admin   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/15 text-accent border border-accent/30; }
+  .badge-analyst { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/15 text-warning border border-warning/30; }
+  .badge-viewer  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ink-faint/20 text-ink-muted border border-white/10; }
+
+  .badge-income  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-positive/15 text-positive border border-positive/30; }
+  .badge-expense { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-negative/15 text-negative border border-negative/30; }
+
+  .stat-card {
+    @apply card p-6 flex flex-col gap-3;
+  }
+
+  .page-title {
+    @apply font-display text-2xl font-bold text-ink tracking-tight;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.25s ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
