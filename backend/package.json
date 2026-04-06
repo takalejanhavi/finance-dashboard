@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "start": "nest start",
+    "start": "prisma generate && npm run build && prisma migrate deploy && node dist/main.js",
     "start:dev": "nest start --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/main.js",
+    "format": "prettier --write \"src/**/*.ts\"",
     "test": "jest",
     "test:cov": "jest --coverage",
     "prisma:generate": "prisma generate",
@@ -54,7 +54,9 @@
     "moduleFileExtensions": ["js", "json", "ts"],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
-    "transform": { "^.+\\.(t|j)s$": "ts-jest" },
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
