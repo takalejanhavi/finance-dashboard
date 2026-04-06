@@ -9,13 +9,14 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
 
-  app.enableCors({
-    origin: [
-      process.env.FRONTEND_URL,
-      'http://localhost:5173',
-    ].filter(Boolean),
-    credentials: true,
-  });
+app.enableCors({
+  origin: [
+    process.env.FRONTEND_URL,
+    'http://localhost:5173',
+    /\.vercel\.app$/,
+  ].filter(Boolean),
+  credentials: true,
+});
 
   app.useGlobalPipes(
     new ValidationPipe({
